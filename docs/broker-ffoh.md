@@ -25,9 +25,11 @@ python setup.py install
 
 ## Configuration
 Clone this repository into `/srv/tunneldigger/tunneldigger/broker/`, read `l2tp_broker.cfg` and
-`cp /srv/tunneldigger/tunneldigger/broker/contrib-ffoh/tunneldigger.service /etc/systemd/system/tunneldigger.service` 
+`cp /srv/tunneldigger/tunneldigger/broker/contrib-ffoh/tunneldigger.service /etc/systemd/system/tunneldigger.service`
 
-Or do it manualy:
+Do `systemctl enable tunneldigger.service && reboot`
+
+**Or do it manualy:**
 ```
 cd /srv/tunneldigger/tunneldigger/broker/
 mv ./l2tp_broker.cfg.example ./l2tp_broker.cfg
