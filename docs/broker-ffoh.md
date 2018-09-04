@@ -1,5 +1,5 @@
 
-# L2TP/tunneldigger broker-setup on Debian 9 "stretch"
+# L2TP/tunneldigger broker-setup on Debian 10 "buster"
 
 * This documentation is not written for general use. It is more a personal manual about how I made the tunneldigger-broker work.
 * For basic documentation check [Python-virtualenv](https://virtualenv.pypa.io/en/stable/) and [tunneldigger](https://tunneldigger.readthedocs.io/en/latest/server.html)
@@ -37,7 +37,8 @@ Configure as explained in config-file. The following hooks are used. They are li
 `session.up=/srv/tunneldigger/tunneldigger/broker/scripts/tunnel.up`
 * Called after the tunnel interface goes down:
 `session.down=/srv/tunneldigger/tunneldigger/broker/scripts/tunnel.down`
-
+* Called after the tunnel MTU gets changed because of PMTU discovery
+`session .mtu-changed=/srv/tunneldigger/tunneldigger/broker/scripts/mtu_changed.sh
 **Hook-Scripts:**
 * tunnel.up
 ```
