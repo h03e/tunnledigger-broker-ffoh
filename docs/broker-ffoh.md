@@ -6,16 +6,9 @@
 * Using modified hooks from [ff-Franken](https://github.com/rohammer/tunneldigger/tree/master/broker/scripts)
 
 ## Prerequisites
-* 
+
 * Added `l2tp_core l2tp_eth l2tp_netlink` to `/etc/modules` 
 * Checked for modules: `find /lib/modules/$(uname -r) -type f -name \l2tp*.ko`
-	/lib/modules/4.16.0-2-amd64/kernel/net/l2tp/l2tp_core.ko
-	/lib/modules/4.16.0-2-amd64/kernel/net/l2tp/l2tp_netlink.ko
-	/lib/modules/4.16.0-2-amd64/kernel/net/l2tp/l2tp_ppp.ko
-	/lib/modules/4.16.0-2-amd64/kernel/net/l2tp/l2tp_ip.ko
-	/lib/modules/4.16.0-2-amd64/kernel/net/l2tp/l2tp_eth.ko
-	/lib/modules/4.16.0-2-amd64/kernel/net/l2tp/l2tp_debugfs.ko
-	/lib/modules/4.16.0-2-amd64/kernel/net/l2tp/l2tp_ip6.ko
 * Installed `iproute bridge-utils libnetfilter-conntrack-dev libnfnetlink-dev libffi-dev python-dev libevent-dev ebtables python-virtualenv`
 * To repair defect linking installed `virtualenv` (sorry^^)
 * Also installed `build-essential` to make the virtualenv build tunneldigger.
@@ -33,6 +26,7 @@ python setup.py install
 ## Configuration
 Clone this repository into `/srv/tunneldigger/tunneldigger/broker/`, read `l2tp_broker.cfg` and
 `cp /srv/tunneldigger/tunneldigger/broker/contrib-ffoh/tunneldigger.service /etc/systemd/system/tunneldigger.service` 
+
 Or do it manualy:
 ```
 cd /srv/tunneldigger/tunneldigger/broker/
@@ -63,7 +57,7 @@ ip link set dev $INTERFACE up mtu $MTU
 ensure_bridge br-${BATDEV}-${MTU}
 brctl addif br-${BATDEV}-${MTU} $INTERFACE
 ```
-* tunnel.up - *test this hook with whitelist.txt-support*
+* tunnel.up.whitelist - *test this hook with whitelist.txt-support*
 ```
 #!/bin/bash
 TUNNEL_ID="$1"
