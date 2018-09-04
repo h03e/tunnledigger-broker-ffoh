@@ -1,0 +1,29 @@
+#!/bin/bash
+TUNNEL_ID="$1"
+INTERFACE="$3"
+MTU="$4"
+BATDEV=bat0
+UUID="$8"
+
+log_message() {
+    message="$1"
+    logger -p 6 -t "Tunneldigger" "$message"
+    echo "$message" | systemd-cat -p info -t "Tunneldigger"
+    echo "$1" 1>&2
+}
+
+if /bin/grep -Fq $UUID /srv/tunneldigger/tunneldigger/broker/whitelist.txt; then
+log_message "New client with UUID=$UUID connected, adding to br-${BATDEV}-${MTU} bridge interface"
+
+	. /srv/tunneldigger/tunneldigger/broker/scripts/bridge_functions
+
+	# Set the interface to UP state
+	ip link set dev $INTERFACE up mtu $MTU
+
+	# Add the interface to our bridge
+	ensure_bridge br-${BATDEV}-${MTU}
+	brctl addif br-${BATDEV}-${MTU} $INTERFACE
+else
+        log_message "New client with UUID=$UUID is not whitelisted, not adding to br-${BATDEV}-${MTU} bridge interface"
+	
+fi

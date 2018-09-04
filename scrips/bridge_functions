@@ -1,0 +1,17 @@
+ensure_bridge()
+{
+  local brname="$1"
+  brctl addbr $brname 2>/dev/null 
+
+  if [[ "$?" == "0" ]]; then
+    # Bridge did not exist before, we have to initialize it
+    # generate random MAC 
+    local mac=$(hexdump -n5 -e'"06" 5/1 ":%02X"' /dev/urandom)
+    ip link set dev $brname address $mac 
+    ip link set dev $brname up
+    # add new bridge to bat-device
+    batctl -m $BATDEV if add $brname
+    # Disable forwarding between bridge ports
+    ebtables -A FORWARD --logical-in $brname -j DROP
+  fi
+}
