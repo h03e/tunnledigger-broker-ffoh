@@ -39,8 +39,9 @@ Configure as explained in config-file. The following hooks are used. They are li
 `session.up=/srv/tunneldigger/tunneldigger/broker/scripts/tunnel.up`
 * Called after the tunnel interface goes down:
 `session.down=/srv/tunneldigger/tunneldigger/broker/scripts/tunnel.down`
-* Called after the tunnel MTU gets changed because of PMTU discovery
-`session .mtu-changed=/srv/tunneldigger/tunneldigger/broker/scripts/mtu_changed.sh
+* Called after the tunnel MTU gets changed because of PMTU discovery:
+`session.mtu-changed=/srv/tunneldigger/tunneldigger/broker/scripts/mtu_changed.sh`
+
 **Hook-Scripts:**
 * tunnel.up
 ```
