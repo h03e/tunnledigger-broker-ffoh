@@ -164,6 +164,20 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 ```
+
+## Control the service
+* Use `systemctl status tunneldigger.service` to check the general status. 
+
+* `ip link` shows the every device with the corresponding bridge.
+
+* `ip l2tp show tunnel` shows active tunnels.
+
+* `ip l2tp show session` shows the corresponding devices.
+
+* `iptables -L -t nat` shows the entries for SNAT and DNAT made by the broker.
+
+* Log-entries are accessed with ` journalctl -u tunneldigger.service`. Note: The logs are rotated regularly. Only recent events are shown.
+
 ## ToDo
 * Define and test process for clonig broker-configuration and test it.
 Couldt be:
